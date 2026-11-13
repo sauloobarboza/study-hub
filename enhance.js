@@ -223,23 +223,28 @@ function show(view){document.querySelectorAll(".view").forEach(v=>v.classList.to
 function simMenu(){
  addSimUI();show("simulator");
  const el=document.getElementById("simulatorContent");
- el.innerHTML='<div class="page-intro"><div class="eyebrow">TREINO E AVALIAÇÃO</div><h1>Simulados</h1><p class="muted">Questões autorais para testar compreensão. Não são questões oficiais da prova.</p></div><div class="sim-menu-grid"><button class="sim-card" data-mode="20"><b>Treino rápido</b><span>20 questões · sem tempo</span></button><button class="sim-card" data-mode="40"><b>Treino intermediário</b><span>40 questões · sem tempo</span></button><button class="sim-card" data-mode="60"><b>Simulado CSA completo</b><span>60 questões · referência de 90 minutos</span></button></div><div class="source-note">O conteúdo é organizado pelos seis domínios e seus pesos oficiais: 7%, 10%, 20%, 20%, 30% e 13%. A seleção de questões é uma amostra autoral. A pontuação de corte oficial não é pública.</div>';
+ el.innerHTML='<header class="simulator-intro"><div class="eyebrow">SERVICE NOW · CSA</div><h1>Central de simulados</h1><p class="muted">Treine com questões autorais organizadas pelos seis domínios do blueprint. Escolha o tamanho da sessão e revise as explicações ao finalizar.</p></header><div class="sim-menu-grid"><button class="sim-card" data-mode="20"><span class="sim-card-top"><span class="sim-card-icon">⚡</span><span class="sim-card-chip">AQUECIMENTO</span></span><span class="sim-card-copy"><b>Treino rápido</b><span>Uma sessão objetiva para revisar os principais conceitos sem comprometer muito tempo.</span></span><span class="sim-card-footer">20 questões <span>Começar →</span></span></button><button class="sim-card" data-mode="40"><span class="sim-card-top"><span class="sim-card-icon">◈</span><span class="sim-card-chip">PRÁTICA</span></span><span class="sim-card-copy"><b>Treino intermediário</b><span>Uma rodada mais longa para testar consistência entre os domínios da certificação.</span></span><span class="sim-card-footer">40 questões <span>Começar →</span></span></button><button class="sim-card" data-mode="60"><span class="sim-card-top"><span class="sim-card-icon">🏁</span><span class="sim-card-chip">FORMATO COMPLETO</span></span><span class="sim-card-copy"><b>Simulado CSA completo</b><span>60 questões com os pesos dos seis domínios e referência de 90 minutos.</span></span><span class="sim-card-footer">60 questões · 90 min <span>Começar →</span></span></button></div><div class="simulator-disclaimer"><span>ⓘ</span><div><strong>Sobre este simulado</strong><br>Questões autorais para estudo, não oficiais e não retiradas de bancos protegidos. O formato busca praticar questões de resposta única e seleção múltipla. O cut score oficial não é público; seu percentual aqui não prevê aprovação.</div></div>';
  el.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>start(+b.dataset.mode));
 }
 let quiz=null;
+function shuffleItems(items){const a=items.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function start(n){
  const order=[4,6,12,12,18,8], pool=questions.filter(q=>q.domain>=0);
  const selected=[];
- for(let d=0;d<6;d++){const group=pool.filter(q=>q.domain===d);const need=Math.round(n*order[d]/60);selected.push(...group.slice(0,need));}
- const remaining=pool.filter(q=>!selected.some(x=>x.id===q.id)).sort(()=>Math.random()-.5);
+ for(let d=0;d<6;d++){
+  const group=shuffleItems(pool.filter(q=>q.domain===d));
+  const need=Math.round(n*order[d]/60);
+  selected.push(...group.slice(0,need));
+ }
+ const remaining=shuffleItems(pool.filter(q=>!selected.some(x=>x.id===q.id)));
  while(selected.length<n&&remaining.length)selected.push(remaining.shift());
- quiz={list:selected.slice(0,n),at:0,answers:{}};
+ quiz={list:shuffleItems(selected).slice(0,n),at:0,answers:{}};
  renderQ();
 }
 function renderQ(){
  const q=quiz.list[quiz.at],answer=quiz.answers[q.id],el=document.getElementById("simulatorContent");
  const selected=Array.isArray(answer)?answer:[];
- el.innerHTML='<div class="sim-head"><div><div class="eyebrow">SIMULADO CSA</div><h1>Questão '+(quiz.at+1)+' de '+quiz.list.length+'</h1><p class="muted">Respostas marcadas: '+Object.keys(quiz.answers).length+'</p></div></div><div class="sim-progress"><span style="width:'+((quiz.at+1)/quiz.list.length*100)+'%"></span></div><article class="quiz sim-question"><div class="eyebrow">'+(q.multi?"SELECIONE TODAS AS ALTERNATIVAS CORRETAS":"SELECIONE UMA ALTERNATIVA")+'</div><h2>'+safe(q.question)+'</h2>'+q.options.map((o,i)=>'<button class="quiz-option '+((q.multi?selected.includes(i):answer===i)?"selected":"")+'" data-answer="'+i+'">'+String.fromCharCode(65+i)+'. '+safe(o)+'</button>').join("")+'<div class="quiz-feedback">'+(answer!==undefined?safe(q.explanation):"")+'</div><div class="lesson-actions"><button class="secondary-btn" id="qPrev" '+(quiz.at===0?"disabled":"")+'>Anterior</button><button class="primary-btn" id="qNext">'+(quiz.at===quiz.list.length-1?"Finalizar":"Próxima")+'</button></div></article>';
+ el.innerHTML='<div class="sim-head"><div><div class="eyebrow">SIMULADO CSA</div><h1>Questão '+(quiz.at+1)+' de '+quiz.list.length+'</h1><p class="muted">Respostas marcadas: '+Object.keys(quiz.answers).length+'</p></div></div><div class="sim-progress"><span style="width:'+((quiz.at+1)/quiz.list.length*100)+'%"></span></div><article class="quiz sim-question"><div class="eyebrow">'+(q.multi?"SELECIONE "+q.correct.length+" ALTERNATIVAS":"SELECIONE UMA ALTERNATIVA")+'</div><h2>'+safe(q.question)+'</h2>'+q.options.map((o,i)=>'<button class="quiz-option '+((q.multi?selected.includes(i):answer===i)?"selected":"")+'" data-answer="'+i+'">'+String.fromCharCode(65+i)+'. '+safe(o)+'</button>').join("")+'<div class="quiz-feedback">'+(answer!==undefined?safe(q.explanation):"")+'</div><div class="lesson-actions"><button class="secondary-btn" id="qPrev" '+(quiz.at===0?"disabled":"")+'>Anterior</button><button class="primary-btn" id="qNext">'+(quiz.at===quiz.list.length-1?"Finalizar":"Próxima")+'</button></div></article>';
  el.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>{const v=+b.dataset.answer;if(q.multi){const a=Array.isArray(quiz.answers[q.id])?quiz.answers[q.id]:[];quiz.answers[q.id]=a.includes(v)?a.filter(x=>x!==v):a.concat(v);}else{quiz.answers[q.id]=v;}renderQ();});
  document.getElementById("qPrev").onclick=()=>{quiz.at--;renderQ();};
  document.getElementById("qNext").onclick=()=>{if(quiz.at<quiz.list.length-1){quiz.at++;renderQ();}else finish();};
