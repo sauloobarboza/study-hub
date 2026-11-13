@@ -1,0 +1,12 @@
+{
+  "name": "Study Hub — Aprenda no seu ritmo",
+  "short_name": "Study Hub",
+  "description": "Estude ServiceNow CSA, HTML, CSS e JavaScript.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f7fb",
+  "theme_color": "#101827",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
