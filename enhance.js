@@ -84,7 +84,7 @@ const bank=[
 ["Para que serve uma related list?","Exibir registros relacionados",["Exibir registros relacionados","Alterar o tema","Conceder papel","Criar plugin"],0,2],
 ["Qual recurso apresenta métricas e gráficos em uma tela?","Dashboard",["Update Set","Dashboard","ACL","Transform Map"],1,2],
 ["O que um template pode fazer?","Preencher campos com valores predefinidos",["Criar tabela","Preencher campos com valores predefinidos","Conceder admin","Instalar plugin"],1,2],
-["Qual objeto organiza usuários em equipes?","Group",["Role","Group","ACL","Dictionary"],1,2],
+["Qual objeto organiza usuários em equipes?","Group",["Role","Group","ACL","Dictionary"],1,1],
 ["O que é uma tarefa atribuída a grupo?","Trabalho encaminhado a uma equipe",["Um tipo de campo","Trabalho encaminhado a uma equipe","Uma view","Uma tag"],1,2],
 ["Qual recurso permite visualização de tarefas em cartões e colunas?","Visual Task Board",["Visual Task Board","Import Set","ACL","Update Set"],0,2],
 ["O que uma notificação faz?","Comunica eventos segundo regras configuradas",["Comunica eventos segundo regras configuradas","Altera herança","Cria tabela","Executa CSS"],0,2],
@@ -99,7 +99,7 @@ const bank=[
 ["Qual ferramenta oferece atendimento conversacional?","Virtual Agent",["Virtual Agent","CMDB","Update Set","Dictionary"],0,3],
 ["O que pode controlar visibilidade e obrigatoriedade de campo na interface?","UI Policy",["ACL","UI Policy","Transform Map","Import Set"],1,3],
 ["Qual é o propósito de aprovação no catálogo?","Autorizar solicitação antes do atendimento quando exigido",["Autorizar solicitação antes do atendimento quando exigido","Substituir variáveis","Criar CI","Importar dados"],0,3],
-["Qual domínio representa 30% da prova?","Database Management and Platform Security",["Instance Configuration","Database Management and Platform Security","Platform Overview","Self Service"],1,4],
+["Qual recurso permite conversas automatizadas de autoatendimento?","Virtual Agent",["Virtual Agent","Update Set","CMDB","Dictionary"],0,3],
 ["Qual estrutura recebe dados antes de transformá-los?","Import Set Table",["Import Set Table","CMDB","Dashboard","Update Set"],0,4],
 ["Qual componente define mapeamento entre staging e destino?","Transform Map",["Business Rule","Transform Map","ACL","UI Policy"],1,4],
 ["O que uma ACL avalia?","Acesso a operações e dados",["Acesso a operações e dados","Somente cores","Ordem de módulos","Tamanho de imagem"],0,4],
@@ -114,21 +114,21 @@ const bank=[
 ["Qual script executa no servidor em operações de registro?","Business Rule",["Client Script","Business Rule","CSS","HTML"],1,5],
 ["Qual momento de Business Rule executa antes da gravação?","before",["after","async","before","display"],2,5],
 ["Qual API consulta registros no servidor?","GlideRecord",["GlideRecord","document","localStorage","querySelector"],0,5],
-["Qual objeto oferece utilidades server-side?","gs",["window","document","gs","navigator"],2,5],
+["Qual opção descreve a função de uma view de formulário?","Apresentar um layout conforme o contexto",["Apresentar um layout conforme o contexto","Criar uma tabela filha","Executar uma Business Rule","Mapear dados de importação"],0,2],
 ["Para que serve Script Include?","Reutilizar lógica",["Reutilizar lógica","Criar tema","Gerar imagem","Criar tabela HTML"],0,5],
 ["Update Sets transportam principalmente o quê?","Alterações de configuração suportadas",["Todos os dados da empresa","Alterações de configuração suportadas","Somente anexos","Somente usuários"],1,5],
 ["O que revisar antes do commit de Update Set?","Preview e conflitos",["Apenas nome","Preview e conflitos","Somente favoritos","Apenas cores"],1,5],
-["Qual camada não deve ser única proteção de dados?","Validação client-side",["ACL server-side","Validação client-side","Permissões de servidor","Autorização"],1,5],
-["Qual linguagem é usada para scripting na plataforma?","JavaScript",["Java","Python","JavaScript","Ruby"],2,5],
-["Qual tecnologia estrutura conteúdo web?","HTML",["CSS","HTML","JavaScript","SQL"],1,0],
-["Qual atributo fornece texto alternativo de imagem?","alt",["src","href","alt","title"],2,0],
-["Qual elemento representa navegação?","nav",["div","nav","span","b"],1,0],
-["Qual unidade CSS é relativa ao tamanho de fonte raiz?","rem",["px","rem","vh","%"],1,0],
-["Qual propriedade ativa Flexbox?","display:flex",["position:flex","display:flex","flex:display","layout:flex"],1,0],
-["Qual método JS transforma itens de array?","map()",["filter()","map()","find()","push()"],1,0],
-["Qual operador compara valor e tipo sem coerção?","===",["=","==","===","!="],2,0],
-["Qual método seleciona primeiro elemento no DOM?","querySelector()",["querySelector()","querySelectorAll()","getJSON()","selectNode()"],0,0],
-["Qual armazenamento persiste entre sessões no navegador?","localStorage",["sessionStorage","localStorage","variável local","event.target"],1,0]
+["Qual recurso permite organizar tarefas em cartões e colunas?","Visual Task Board",["Transform Map","Visual Task Board","ACL","Update Set"],1,2],
+["O que uma notificação configurada pode fazer?","Avisar destinatários sobre um evento",["Avisar destinatários sobre um evento","Alterar a classe de um CI","Criar uma ACL","Executar uma transformação"],0,2],
+["Qual parte da plataforma oferece acesso a aplicações e módulos?","Unified Navigation",["Import Set","Unified Navigation","Transform Map","Business Rule"],1,0],
+["O que representa uma instância ServiceNow?","Ambiente provisionado da plataforma",["Uma role","Ambiente provisionado da plataforma","Um campo","Uma notificação"],1,0],
+["Qual é a função de um módulo de navegação?","Abrir uma página ou funcionalidade",["Criar uma tabela","Abrir uma página ou funcionalidade","Conceder acesso automaticamente","Importar dados"],1,0],
+["Qual recurso permite localizar aplicações e módulos disponíveis?","Pesquisa da navegação",["Transform Map","Pesquisa da navegação","Update Set","ACL"],1,0],
+["O que deve ser verificado antes de ativar um plugin?","Dependências, compatibilidade e impacto",["Apenas o nome","Dependências, compatibilidade e impacto","Somente os favoritos","Apenas o tema"],1,1],
+["Qual objeto representa uma identidade de acesso?","User",["Group","Role","User","ACL"],2,1],
+["Qual objeto organiza usuários em equipes?","Group",["Group","ACL","Transform Map","View"],0,1],
+["Qual recurso habilita funcionalidades adicionais na instância?","Plugin",["Favorite","Plugin","Template","Dashboard"],1,1],
+["Qual prática reduz riscos ao personalizar a instância?","Preferir configuração suportada e testar mudanças",["Alterar diretamente produção","Preferir configuração suportada e testar mudanças","Desativar ACLs","Ignorar upgrades"],1,1]
 ];
 const questions=bank.map((q,i)=>({id:"extra-q"+i,question:q[0],options:q[2],correct:q[3],explanation:"Resposta: "+q[1]+". Esta é uma questão autoral de treino baseada nos conceitos do conteúdo. Consulte a documentação oficial para aprofundar.",domain:q[4]}));
 function addSimUI(){
@@ -146,7 +146,7 @@ function show(view){document.querySelectorAll(".view").forEach(v=>v.classList.to
 function simMenu(){
  addSimUI();show("simulator");
  const el=document.getElementById("simulatorContent");
- el.innerHTML='<div class="page-intro"><div class="eyebrow">TREINO E AVALIAÇÃO</div><h1>Simulados</h1><p class="muted">Questões autorais para testar compreensão. Não são questões oficiais da prova.</p></div><div class="sim-menu-grid"><button class="sim-card" data-mode="20"><b>Treino rápido</b><span>20 questões · sem tempo</span></button><button class="sim-card" data-mode="40"><b>Treino intermediário</b><span>40 questões · sem tempo</span></button><button class="sim-card" data-mode="60"><b>Simulado CSA completo</b><span>60 questões · referência de 90 minutos</span></button></div><div class="source-note">Distribuição por domínio conforme blueprint de janeiro/2026: 7%, 10%, 20%, 20%, 30% e 13%. A pontuação de corte oficial não é pública.</div>';
+ el.innerHTML='<div class="page-intro"><div class="eyebrow">TREINO E AVALIAÇÃO</div><h1>Simulados</h1><p class="muted">Questões autorais para testar compreensão. Não são questões oficiais da prova.</p></div><div class="sim-menu-grid"><button class="sim-card" data-mode="20"><b>Treino rápido</b><span>20 questões · sem tempo</span></button><button class="sim-card" data-mode="40"><b>Treino intermediário</b><span>40 questões · sem tempo</span></button><button class="sim-card" data-mode="60"><b>Simulado CSA completo</b><span>60 questões · referência de 90 minutos</span></button></div><div class="source-note">O conteúdo é organizado pelos seis domínios e seus pesos oficiais: 7%, 10%, 20%, 20%, 30% e 13%. A seleção de questões é uma amostra autoral. A pontuação de corte oficial não é pública.</div>';
  el.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>start(+b.dataset.mode));
 }
 let quiz=null;
@@ -154,7 +154,8 @@ function start(n){
  const order=[4,6,12,12,18,8], pool=questions.filter(q=>q.domain>=0);
  const selected=[];
  for(let d=0;d<6;d++){const group=pool.filter(q=>q.domain===d);const need=Math.round(n*order[d]/60);selected.push(...group.slice(0,need));}
- while(selected.length<n){const q=pool[(selected.length*7)%pool.length];if(!selected.some(x=>x.id===q.id))selected.push(q);}
+ const remaining=pool.filter(q=>!selected.some(x=>x.id===q.id)).sort(()=>Math.random()-.5);
+ while(selected.length<n&&remaining.length)selected.push(remaining.shift());
  quiz={list:selected.slice(0,n),at:0,answers:{}};
  renderQ();
 }
