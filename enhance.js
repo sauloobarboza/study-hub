@@ -183,5 +183,29 @@ openModule=function(id){originalOpenModule(id);const c=courses.find(x=>x.id===id
 const originalRenderHome=renderHome;
 renderHome=function(){originalRenderHome();const total=courses.reduce((n,c)=>n+c.lessons.length,0);const totalEl=document.getElementById("totalCount");if(totalEl)totalEl.textContent=total;};
 renderHome();
+
+quizFor=function(id,index){
+ const course=courses.find(x=>x.id===id), lesson=course.lessons[index];
+ const pool=course.lessons.filter((x,i)=>i!==index).map(x=>x[1]);
+ const choices=[lesson[1],...pool.slice(0,3)].sort(()=>Math.random()-.5);
+ return {q:"Qual definição corresponde a: "+lesson[0]+"?",a:choices,correct:choices.indexOf(lesson[1])};
+};
+const originalOpenLesson=openLesson;
+openLesson=function(id,index){
+ originalOpenLesson(id,index);
+ const sources={
+  csa:[["Blueprint oficial CSA (jan/2026)","https://learning.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0011554"],["Documentação de produto ServiceNow","https://docs.servicenow.com/"]],
+  html:[["MDN — HTML","https://developer.mozilla.org/en-US/docs/Web/HTML"]],
+  css:[["MDN — CSS","https://developer.mozilla.org/en-US/docs/Web/CSS"]],
+  js:[["MDN — JavaScript","https://developer.mozilla.org/en-US/docs/Web/JavaScript"]]
+ };
+ const content=document.querySelector("#lessonContent .lesson-content");
+ if(content&&!content.querySelector(".source-note")){
+  const box=document.createElement("div");box.className="source-note";
+  box.textContent="Fontes para aprofundamento: ";
+  sources[id].forEach((s,i)=>{if(i)box.appendChild(document.createTextNode(" · "));const a=document.createElement("a");a.href=s[1];a.target="_blank";a.rel="noopener noreferrer";a.textContent=s[0];box.appendChild(a);});
+  content.appendChild(box);
+ }
+};
 const oldNav=document.querySelectorAll(".nav-item");oldNav.forEach(b=>{if(b.dataset.view==="library")b.addEventListener("click",()=>setTimeout(addSimUI,0));});
 })();
