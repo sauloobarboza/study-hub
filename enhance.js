@@ -254,7 +254,7 @@ quizFor=function(id,index){
  const course=courses.find(x=>x.id===id), lesson=course.lessons[index];
  const pool=course.lessons.filter((x,i)=>i!==index).map(x=>x[1]);
  const choices=[lesson[1],...pool.slice(0,3)].sort(()=>Math.random()-.5);
- return {q:"Qual definição corresponde a: "+lesson[0]+"?",a:choices,correct:choices.indexOf(lesson[1])};
+ return {q:"Qual definição corresponde a: "+lesson[0]+"?",a:choices,correct:choices.indexOf(lesson[1]),explain:lesson[2]};
 };
 const originalOpenLesson=openLesson;
 openLesson=function(id,index){
