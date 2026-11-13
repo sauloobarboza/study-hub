@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Seu espaço pessoal de estudos: ServiceNow CSA, HTML, CSS e JavaScript.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Study Hub — seu espaço de evolução</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Study Hub início">
+        <span class="brand-mark">S</span><span>study<span class="brand-light">hub</span></span>
+      </a>
+      <div class="side-label">ESPAÇO DE ESTUDO</div>
+      <button class="nav-item active" data-view="home"><span>⌂</span> Visão geral</button>
+      <button class="nav-item" data-view="library"><span>▦</span> Meus módulos</button>
+      <div class="side-label side-spaced">SEU PROGRESSO</div>
+      <div class="side-progress" id="sideProgress"></div>
+      <div class="sidebar-bottom">
+        <div class="mini-profile"><div class="avatar">S</div><div><strong>Meu Study Hub</strong><small>Aprendizado contínuo</small></div></div>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-brand" data-view="home"><span class="brand-mark">S</span> studyhub</button>
+        <div class="top-actions">
+          <span class="today-label" id="todayLabel"></span>
+          <button class="icon-btn" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">☼</button>
+          <button class="avatar small-avatar" title="Perfil">S</button>
+        </div>
+      </header>
+      <section class="view active" id="homeView">
+        <div class="welcome-row">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-dot"></span> SEU PRÓXIMO PASSO COMEÇA AQUI</div>
+            <h1>Aprender um pouco<br><span>todos os dias.</span></h1>
+            <p class="muted welcome-copy">Um espaço só seu para evoluir no seu ritmo. Cada pequena sessão conta.</p>
+          </div>
+          <div class="welcome-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-core">✦</div><span class="float f1">HTML</span><span class="float f2">JS</span><span class="float f3">CSA</span></div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon purple">◷</div><div><small>Progresso geral</small><strong id="overallPct">0%</strong><span class="stat-note">do seu caminho</span></div><div class="stat-ring" id="overallRing"><span>0%</span></div></article>
+          <article class="stat-card"><div class="stat-icon mint">✓</div><div><small>Lições concluídas</small><strong id="completedCount">0</strong><span class="stat-note">de <b id="totalCount">0</b> lições</span></div></article>
+          <article class="stat-card"><div class="stat-icon amber">⚡</div><div><small>Seu ritmo</small><strong id="activeModules">0/4</strong><span class="stat-note">módulos iniciados</span></div></article>
+        </div>
+        <div class="section-heading"><div><div class="eyebrow">TRILHAS DE APRENDIZADO</div><h2>Continue sua evolução</h2></div><button class="text-button" data-view="library">Ver todos os módulos <span>→</span></button></div>
+        <div class="module-grid" id="homeModules"></div>
+        <div class="bottom-grid">
+          <section class="panel next-panel"><div class="panel-heading"><div><div class="eyebrow">PRÓXIMA ETAPA</div><h3>Retome de onde parou</h3></div><span class="panel-icon">↗</span></div><div id="nextLesson"></div></section>
+          <section class="panel tip-panel"><div class="tip-symbol">✦</div><div><div class="eyebrow">LEMBRETE DO DIA</div><h3>Consistência vence intensidade.</h3><p class="muted">Dez minutos de estudo focado hoje são melhores do que esperar pelo dia perfeito.</p></div></section>
+        </div>
+      </section>
+      <section class="view" id="libraryView">
+        <div class="page-intro"><div class="eyebrow">SUA BIBLIOTECA</div><h1>Meus módulos</h1><p class="muted">Quatro trilhas, um objetivo: aprender fazendo.</p></div>
+        <div class="module-grid library-grid" id="libraryModules"></div>
+      </section>
+      <section class="view" id="moduleView">
+        <button class="back-button" id="backHome">← Voltar aos módulos</button>
+        <div id="moduleContent"></div>
+      </section>
+      <section class="view" id="lessonView">
+        <button class="back-button" id="backModule">← Voltar ao módulo</button>
+        <div id="lessonContent"></div>
+      </section>
+      <footer>Feito para estudar no seu ritmo <span>✦</span> Seus dados ficam neste dispositivo.</footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
