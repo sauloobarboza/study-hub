@@ -4,12 +4,12 @@ Aplicativo pessoal de estudos, instalável como PWA.
 
 ## Trilhas atuais
 
-- **ServiceNow CSA:** 6 domínios do blueprint oficial de janeiro de 2026, com 28 aulas e simulado autoral de 60 questões.
-- **HTML:** 14 aulas.
-- **CSS:** 14 aulas.
-- **JavaScript:** 14 aulas.
+- **ServiceNow CSA:** 6 domínios do blueprint oficial de janeiro de 2026, com 52 aulas e simulado autoral de 60 questões.
+- **HTML:** 24 aulas.
+- **CSS:** 24 aulas.
+- **JavaScript:** 24 aulas.
 
-Total atual: 70 aulas.
+Total atual: 124 aulas.
 
 ## Simulados
 
