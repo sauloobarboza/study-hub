@@ -298,11 +298,11 @@ const originalOpenLesson=openLesson;
 openLesson=function(id,index){
  originalOpenLesson(id,index);
  const sources={
-  csa:[["Blueprint oficial CSA (jan/2026)","https://learning.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0011554"],["Documentação de produto ServiceNow","https://docs.servicenow.com/"]],
+  csa:[["Blueprint oficial CSA (jan/2026)","https://learning.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0011554"],["Documentação de produto ServiceNow","https://docs.servicenow.com/"],["Jorge Vilas Boas — conteúdo em português","https://www.youtube.com/@jorgeboas"],["ServiceNow Brasil — canal e vídeos técnicos","https://www.youtube.com/@servicenowbr"]],
   html:[["MDN — HTML","https://developer.mozilla.org/en-US/docs/Web/HTML"]],
   css:[["MDN — CSS","https://developer.mozilla.org/en-US/docs/Web/CSS"]],
   js:[["MDN — JavaScript","https://developer.mozilla.org/en-US/docs/Web/JavaScript"]],
-  arch:[["ServiceNow University — Solution Architect","https://www.servicenow.com/br/university/what-is-a-solution-architect.html"],["ServiceNow Product Documentation","https://docs.servicenow.com/"]]
+  arch:[["ServiceNow University — Solution Architect","https://www.servicenow.com/br/university/what-is-a-solution-architect.html"],["ServiceNow Product Documentation","https://docs.servicenow.com/"],["Tiago Macul — ServiceNow Brasil","https://www.youtube.com/@servicenowbr"],["Jorge Vilas Boas — conteúdo em português","https://www.youtube.com/@jorgeboas"]]
  };
  const content=document.querySelector("#lessonContent .lesson-content");
  if(content&&!content.querySelector(".source-note")){
