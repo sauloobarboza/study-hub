@@ -249,28 +249,38 @@ function simMenu(){
 }
 let quiz=null;
 function shuffleItems(items){const a=items.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+let examClock=null;
 function start(n){
- const order=[4,6,12,12,18,8], pool=questions.filter(q=>q.domain>=0);
- const selected=[];
+ const weights=[4,6,12,12,18,8],pool=questions.filter(q=>q.domain>=0),selected=[];
  for(let d=0;d<6;d++){
   const group=shuffleItems(pool.filter(q=>q.domain===d));
-  const need=Math.round(n*order[d]/60);
+  const need=Math.round(n*weights[d]/60);
   selected.push(...group.slice(0,need));
  }
  const remaining=shuffleItems(pool.filter(q=>!selected.some(x=>x.id===q.id)));
  while(selected.length<n&&remaining.length)selected.push(remaining.shift());
- quiz={list:shuffleItems(selected).slice(0,n),at:0,answers:{}};
+ const minutes=n===60?90:n===40?60:30;
+ quiz={list:shuffleItems(selected).slice(0,n),at:0,answers:{},review:{},startedAt:Date.now(),deadline:Date.now()+minutes*60000,minutes};
+ if(examClock)clearInterval(examClock);
+ examClock=setInterval(()=>{if(!quiz)return;const left=Math.max(0,quiz.deadline-Date.now());const timer=document.getElementById("examTimer");if(timer)timer.textContent=formatTime(left);if(left===0)finish();},1000);
  renderQ();
 }
+function formatTime(ms){const total=Math.ceil(ms/1000),m=Math.floor(total/60),s=total%60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");}
 function renderQ(){
+ if(!quiz)return;
  const q=quiz.list[quiz.at],answer=quiz.answers[q.id],el=document.getElementById("simulatorContent");
  const selected=Array.isArray(answer)?answer:[];
- el.innerHTML='<div class="sim-head"><div><div class="eyebrow">SIMULADO CSA</div><h1>Questão '+(quiz.at+1)+' de '+quiz.list.length+'</h1><p class="muted">Respostas marcadas: '+Object.keys(quiz.answers).length+'</p></div></div><div class="sim-progress"><span style="width:'+((quiz.at+1)/quiz.list.length*100)+'%"></span></div><article class="quiz sim-question"><div class="eyebrow">'+(q.multi?"SELECIONE "+q.correct.length+" ALTERNATIVAS":"SELECIONE UMA ALTERNATIVA")+'</div><h2>'+safe(q.question)+'</h2>'+q.options.map((o,i)=>'<button class="quiz-option '+((q.multi?selected.includes(i):answer===i)?"selected":"")+'" data-answer="'+i+'">'+String.fromCharCode(65+i)+'. '+safe(o)+'</button>').join("")+'<div class="quiz-feedback">'+(answer!==undefined?safe(q.explanation):"")+'</div><div class="lesson-actions"><button class="secondary-btn" id="qPrev" '+(quiz.at===0?"disabled":"")+'>Anterior</button><button class="primary-btn" id="qNext">'+(quiz.at===quiz.list.length-1?"Finalizar":"Próxima")+'</button></div></article>';
- el.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>{const v=+b.dataset.answer;if(q.multi){const a=Array.isArray(quiz.answers[q.id])?quiz.answers[q.id]:[];quiz.answers[q.id]=a.includes(v)?a.filter(x=>x!==v):a.concat(v);}else{quiz.answers[q.id]=v;}renderQ();});
+ const marked=Object.keys(quiz.answers).length,remaining=Math.max(0,quiz.deadline-Date.now());
+ const answered=quiz.list.filter(item=>quiz.answers[item.id]!==undefined).length;
+ el.innerHTML='<div class="sim-head"><div><div class="eyebrow">SIMULADO CSA · '+quiz.minutes+' MIN</div><h1>Questão '+(quiz.at+1)+' de '+quiz.list.length+'</h1><p class="muted">'+answered+' respondidas · '+(quiz.list.length-answered)+' pendentes</p></div><div class="sim-score"><span id="examTimer">'+formatTime(remaining)+'</span><small>Tempo restante</small></div></div><div class="sim-progress"><span style="width:'+((quiz.at+1)/quiz.list.length*100)+'%"></span></div><div class="question-map" aria-label="Navegação das questões">'+quiz.list.map((item,i)=>'<button type="button" class="question-jump '+(i===quiz.at?"current ":"")+(quiz.answers[item.id]!==undefined?"answered ":"")+(quiz.review[item.id]?"flagged":"")+'" data-jump="'+i+'" aria-label="Ir para questão '+(i+1)+'">'+(i+1)+'</button>').join("")+'</div><article class="quiz sim-question"><div class="eyebrow">'+(q.multi?"SELECIONE "+q.correct.length+" ALTERNATIVAS":"SELECIONE UMA ALTERNATIVA")+'</div><h2>'+safe(q.question)+'</h2>'+q.options.map((o,i)=>'<button type="button" class="quiz-option '+((q.multi?selected.includes(i):answer===i)?"selected":"")+'" data-answer="'+i+'" aria-pressed="'+(q.multi?selected.includes(i):answer===i)+'"><span class="answer-letter">'+String.fromCharCode(65+i)+'</span><span>'+safe(o)+'</span></button>').join("")+'<div class="quiz-feedback">'+(answer!==undefined?"Resposta registrada. Você poderá revisar a explicação ao finalizar.":"Escolha sua resposta para continuar.")+'</div><div class="question-tools"><button type="button" class="secondary-btn" id="flagQuestion">'+(quiz.review[q.id]?"★ Marcada para revisão":"☆ Marcar para revisão")+'</button><span class="question-hint">'+(q.multi?"Seleção múltipla · sem crédito parcial":"Resposta única")+'</span></div><div class="lesson-actions"><button type="button" class="secondary-btn" id="qPrev" '+(quiz.at===0?"disabled":"")+'>← Anterior</button><button type="button" class="primary-btn" id="qNext">'+(quiz.at===quiz.list.length-1?"Finalizar prova":"Próxima →")+'</button></div></article>';
+ el.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>{const v=+b.dataset.answer;if(q.multi){const a=Array.isArray(quiz.answers[q.id])?quiz.answers[q.id]:[];quiz.answers[q.id]=a.includes(v)?a.filter(x=>x!==v):a.concat(v);}else quiz.answers[q.id]=v;renderQ();});
+ el.querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>{quiz.at=+b.dataset.jump;renderQ();});
+ document.getElementById("flagQuestion").onclick=()=>{quiz.review[q.id]=!quiz.review[q.id];renderQ();};
  document.getElementById("qPrev").onclick=()=>{quiz.at--;renderQ();};
  document.getElementById("qNext").onclick=()=>{if(quiz.at<quiz.list.length-1){quiz.at++;renderQ();}else finish();};
 }
 function finish(){
+ if(examClock){clearInterval(examClock);examClock=null;}
  const isRight=q=>{const a=quiz.answers[q.id];if(q.multi)return Array.isArray(a)&&a.length===q.correct.length&&a.every(x=>q.correct.includes(x));return a===q.correct;};
  const correct=quiz.list.filter(isRight).length,pct=Math.round(correct/quiz.list.length*100);
  document.getElementById("simulatorContent").innerHTML='<div class="result-panel"><div class="eyebrow">RESULTADO</div><h1>'+correct+' de '+quiz.list.length+'</h1><div class="result-pct">'+pct+'% de acertos</div><p class="muted">'+(pct>=80?"Bom resultado neste treino.":pct>=60?"Revise os assuntos que errou e repita o simulado.":"Volte às aulas, estude as explicações e tente novamente.")+'</p><h2>Revisão das respostas</h2>'+quiz.list.map((q,i)=>'<div class="review-item"><b>'+(i+1)+'. '+safe(q.question)+'</b><p>'+(isRight(q)?"✓ Correta":"✕ Incorreta ou não respondida")+' — '+safe(q.explanation)+'</p></div>').join("")+'<p class="source-note">Simulado de autoria própria, não oficial. O percentual não representa o cut score da ServiceNow nem garante aprovação.</p><button class="primary-btn" id="again">Novo simulado</button></div>';
