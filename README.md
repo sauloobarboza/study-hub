@@ -12,6 +12,10 @@ Aplicativo pessoal de estudos, instalável como PWA.
 
 Total atual: 140 aulas.
 
+## Método de aprendizagem
+
+As trilhas combinam objetivos claros, explicação conceitual, aplicação em cenários, checagens de recuperação ativa e revisão dos erros. A trilha de arquitetura enfatiza análise de trade-offs, decisões documentadas e consequências operacionais. Esta abordagem é inspirada em práticas educacionais reconhecidas; o aplicativo não é afiliado nem certificado por Harvard, MIT ou ServiceNow.
+
 ## Simulados
 
 O simulado CSA oferece sessões de 20, 40 e 60 questões, com itens de resposta única e seleção múltipla. O modo de 60 questões segue a quantidade e a distribuição de domínios do blueprint de janeiro de 2026. As questões são autorais para estudo; não são questões oficiais, não reproduzem banco protegido e não representam o cut score da certificação.
@@ -27,7 +31,7 @@ A trilha de Arquitetura ServiceNow é conteúdo educacional independente inspira
 - [CSA Mainline Exam Blueprint — ServiceNow University](https://learning.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0011554)
 - [ServiceNow Product Documentation](https://docs.servicenow.com/)
 - [ServiceNow University — Solution Architect](https://www.servicenow.com/br/university/what-is-a-solution-architect.html)
-- [Jorge Vilas Boas — YouTube](https://www.youtube.com/@jorgeboas)
+- [Jorge Vilas Boas — YouTube](https://www.youtube.com/c/JorgeLuizVilasBoasNunes)
 - [ServiceNow Brasil / Tiago Macul — YouTube](https://www.youtube.com/@servicenowbr)
 - [MDN Web Docs — HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - [MDN Web Docs — CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
