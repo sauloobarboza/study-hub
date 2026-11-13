@@ -13,7 +13,7 @@ Total atual: 124 aulas.
 
 ## Simulados
 
-O simulado CSA oferece sessões de 20, 40 e 60 questões. O modo de 60 questões segue a quantidade e a distribuição de domínios do blueprint de janeiro de 2026. As questões são autorais para estudo; não são questões oficiais, não reproduzem banco protegido e não representam o cut score da certificação.
+O simulado CSA oferece sessões de 20, 40 e 60 questões, com itens de resposta única e seleção múltipla. O modo de 60 questões segue a quantidade e a distribuição de domínios do blueprint de janeiro de 2026. As questões são autorais para estudo; não são questões oficiais, não reproduzem banco protegido e não representam o cut score da certificação.
 
 O blueprint oficial informa 60 questões e 90 minutos. A pontuação de corte não é divulgada publicamente e não deve ser presumida como 70%.
 
