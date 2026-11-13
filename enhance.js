@@ -278,7 +278,7 @@ function finish(){
 }
 addSimUI();
 const home=document.querySelector(".welcome-row h1");if(home){home.innerHTML='Seu espaço<br><span>de estudos.</span>';}
-const welcomeCopy=document.querySelector(".welcome-copy");if(welcomeCopy)welcomeCopy.textContent="ServiceNow CSA, HTML, CSS e JavaScript.";
+const welcomeCopy=document.querySelector(".welcome-copy");if(welcomeCopy)welcomeCopy.textContent="ServiceNow CSA, desenvolvimento web e arquitetura de soluções.";
 const sectionTitle=document.querySelector(".section-heading h2");if(sectionTitle)sectionTitle.textContent="Meus cursos";
 const libraryCopy=document.querySelector("#libraryView .page-intro p");if(libraryCopy)libraryCopy.textContent="Conteúdo, aulas e exercícios.";
 const footer=document.querySelector("footer");if(footer)footer.textContent="Study Hub · Seus dados e seu progresso ficam neste dispositivo.";
