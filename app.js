@@ -51,7 +51,7 @@ function renderHome(){
  $("#homeModules").innerHTML=courses.map(courseCard).join("");$("#libraryModules").innerHTML=courses.map(courseCard).join("");
  const done=Object.values(progress).filter(Boolean).length,pct=Math.round(done/totalLessons()*100);
  $("#overallPct").textContent=pct+"%";$("#completedCount").textContent=done;$("#totalCount").textContent=totalLessons();
- $("#activeModules").textContent=courses.filter(c=>stats(c).done>0).length+"/4";
+ $("#activeModules").textContent=courses.filter(c=>stats(c).done>0).length+"/"+courses.length;
  $("#overallRing").style.background=`conic-gradient(var(--purple) ${pct}%,var(--line) 0)`;$("#overallRing span").textContent=pct+"%";
  $("#sideProgress").innerHTML=courses.map(c=>`<div class="side-course"><span class="tiny-dot" style="background:${c.color}"></span>${c.short}<b>${stats(c).pct}%</b></div>`).join("");
  const next=courses.flatMap(c=>c.lessons.map((l,i)=>({c,l,i}))).find(x=>!completed(x.c,x.i))||{c:courses[0],l:courses[0].lessons[0],i:0};
