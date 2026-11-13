@@ -178,8 +178,9 @@ const sectionTitle=document.querySelector(".section-heading h2");if(sectionTitle
 const libraryCopy=document.querySelector("#libraryView .page-intro p");if(libraryCopy)libraryCopy.textContent="Conteúdo, aulas e exercícios.";
 const footer=document.querySelector("footer");if(footer)footer.textContent="Study Hub · Seus dados e seu progresso ficam neste dispositivo.";
 const originalOpenModule=openModule;
-openModule=function(id){originalOpenModule(id);const c=courses.find(x=>x.id===id);const target=document.getElementById("moduleContent");if(target&&c){const bar=document.createElement("div");bar.className="module-tools";bar.innerHTML='<button class="primary-btn" id="coursePractice">Exercícios do módulo</button>'+(id==="csa"?'<button class="secondary-btn" id="courseExam">Simulado CSA · 60 questões</button>':"");target.insertBefore(bar,target.querySelector(".lesson-list"));document.getElementById("coursePractice").onclick=simMenu;const exam=document.getElementById("courseExam");if(exam)exam.onclick=simMenu;}};
+openModule=function(id){originalOpenModule(id);const c=courses.find(x=>x.id===id);const target=document.getElementById("moduleContent");if(target&&c){const bar=document.createElement("div");bar.className="module-tools";bar.innerHTML='<button class="primary-btn" id="coursePractice">Exercícios do módulo</button>'+(id==="csa"?'<button class="secondary-btn" id="courseExam">Simulado CSA · 60 questões</button>':"");target.insertBefore(bar,target.querySelector(".lesson-list"));document.getElementById("coursePractice").onclick=()=>{if(id==="csa")simMenu();else openLesson(id,0);};const exam=document.getElementById("courseExam");if(exam)exam.onclick=simMenu;}};
 const originalRenderHome=renderHome;
 renderHome=function(){originalRenderHome();const total=courses.reduce((n,c)=>n+c.lessons.length,0);const totalEl=document.getElementById("totalCount");if(totalEl)totalEl.textContent=total;};
+renderHome();
 const oldNav=document.querySelectorAll(".nav-item");oldNav.forEach(b=>{if(b.dataset.view==="library")b.addEventListener("click",()=>setTimeout(addSimUI,0));});
 })();
