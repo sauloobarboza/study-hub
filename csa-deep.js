@@ -110,8 +110,10 @@ openLesson=function(id,index){
  document.getElementById("deepPrev").onclick=()=>openLesson(id,index-1);
  document.getElementById("deepNext").onclick=()=>openLesson(id,index+1);
 };
-const backHome=document.getElementById("backHome");if(backHome)backHome.onclick=()=>showView("library");
-const backModule=document.getElementById("backModule");if(backModule)backModule.onclick=()=>openModule(state.module||"csa");
+const backHome=document.getElementById("backHome");
+if(backHome)backHome.onclick=()=>{restoring=true;baseShowView("library");restoring=false;history.replaceState({studyHub:true,view:"library",module:null,lesson:null},"","#library");};
+const backModule=document.getElementById("backModule");
+if(backModule)backModule.onclick=()=>{restoring=true;previousModule(state.module||"csa");restoring=false;history.replaceState({studyHub:true,view:"module",module:state.module,lesson:null},"","#module");};
 let restoring=false;const baseShowView=showView;
 showView=function(view){baseShowView(view);if(!restoring&&history&&history.pushState)history.pushState({studyHub:true,view,module:state.module,lesson:state.lesson},"","#"+view);};
 if(history&&history.replaceState)history.replaceState({studyHub:true,view:"home",module:null,lesson:null},"",location.pathname+location.search);
