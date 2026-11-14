@@ -1,4 +1,4 @@
-const CACHE="study-hub-v9";
+const CACHE="study-hub-v10";
 const ASSETS=["./","./index.html","./styles.css","./app.js","./enhance.js","./csa-deep.js","./manifest.json","./icon.svg"];
 self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
