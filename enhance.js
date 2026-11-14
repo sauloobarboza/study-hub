@@ -131,6 +131,13 @@ const bank=[
 ["Qual prática reduz riscos ao personalizar a instância?","Preferir configuração suportada e testar mudanças",["Alterar diretamente produção","Preferir configuração suportada e testar mudanças","Desativar ACLs","Ignorar upgrades"],1,1]
 ];
 const questions=bank.map((q,i)=>({id:"extra-q"+i,question:q[0],options:q[2],correct:q[3],explanation:"Resposta: "+q[1]+". Esta é uma questão autoral de treino baseada nos conceitos do conteúdo. Consulte a documentação oficial para aprofundar.",domain:q[4]}));
+/* API interna para anexar questões autorais produzidas pelas aulas aprofundadas. */
+window.StudyHubAddQuestions=function(items){
+ (items||[]).forEach(q=>{
+  if(!q||!q.id||questions.some(existing=>existing.id===q.id))return;
+  questions.push({id:q.id,question:q.question,options:q.options,correct:q.correct,explanation:q.explanation,domain:q.domain,multi:Array.isArray(q.correct)});
+ });
+};
 
 
 function multiQuestion(oldText,newText,options,correct,why){
