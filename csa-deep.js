@@ -84,6 +84,10 @@ quiz:{q:"Para tornar um campo obrigatório com base em condição simples do for
 quiz:{q:"Qual tipo de Business Rule executa antes da gravação?",a:["before","after","async","display"],correct:0,why:"A regra before roda antes da persistência e pode validar ou ajustar valores."},sources:[["Business Rules — Zurich","https://www.servicenow.com/docs/r/pt-BR/zurich/api-reference/business-rules-classic/c_BusinessRules.html"],["Business Rules — Australia","https://www.servicenow.com/docs/r/api-reference/business-rules-classic/c_BusinessRules.html"]]}
 ];
 const csa=courses.find(c=>c.id==="csa"); if(!csa)return;
+if(window.StudyHubAddQuestions){
+ const domains=[4,4,3,5,5,5];
+ window.StudyHubAddQuestions(lessons.map((l,i)=>({id:"deep-csa-"+(i+1),question:l.quiz.q,options:l.quiz.a,correct:l.quiz.correct,explanation:l.quiz.why,domain:domains[i]})));
+}
 const startIndex=csa.lessons.length;
 lessons.forEach((l,i)=>csa.lessons.push([l.title,l.subtitle,"Aula aprofundada com conceito, prática guiada e revisão.",l.html,"",{deep:true,quiz:l.quiz,sources:l.sources,lessonNumber:i+1}]));
 if(typeof renderHome==="function") renderHome();
