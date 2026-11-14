@@ -86,6 +86,7 @@ quiz:{q:"Qual tipo de Business Rule executa antes da gravação?",a:["before","a
 const csa=courses.find(c=>c.id==="csa"); if(!csa)return;
 const startIndex=csa.lessons.length;
 lessons.forEach((l,i)=>csa.lessons.push([l.title,l.subtitle,"Aula aprofundada com conceito, prática guiada e revisão.",l.html,"",{deep:true,quiz:l.quiz,sources:l.sources,lessonNumber:i+1}]));
+if(typeof renderHome==="function") renderHome();
 const previousModule=openModule;
 openModule=function(id){
  previousModule(id);
